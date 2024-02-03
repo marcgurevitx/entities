@@ -106,8 +106,9 @@ end function
 
 getExtDirs = function(path)
 	extDirs = []
-	if file.exists("dirs.txt") then
-		for extDir in file.readLines("dirs.txt")
+	dirsFile = file.child(path, "dirs.txt")
+	if file.exists(dirsFile) then
+		for extDir in file.readLines(dirsFile)
 			if not extDir then continue
 			for xd in [extDir] + getExtDirs(extDir)
 				extDirs.push file.child(path, xd)
